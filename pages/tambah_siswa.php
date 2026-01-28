@@ -1,0 +1,103 @@
+<?php
+include("header.php");
+include("config.php");
+?>
+
+
+
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-1">
+            <div class="card-header pb-0">
+              <h6>Authors Form</h6>
+              <form method="Post">
+                <div class="form-group">
+                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
+                    <input class="form-control" name="data_nama" type="text" value="" id="" >
+                </div>
+                 <div class="form-group">
+                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                    <option>X-1</option>
+                    <option>X-2</option>
+                    <option>X-3</option>
+                    
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
+                    <input class="form-control" name="data_jurusan" type="text" id="">
+                </div>
+                <div class="form-group">
+                    <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
+                    <input class="form-control" name="data_alamat" type="text" value="" id="">
+                </div>
+
+                 <div class="text-center mt-4 mb-3">
+                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-primary">
+                                        <i class="fa-solid fa-paper-plane"></i></i>Input Data
+                                    </button>
+                 </div>
+  
+            </form>
+            </div>
+            
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $nama  = $_POST['data_nama'];
+    $kelas = $_POST['data_kelas'];
+    $jurusan = $_POST['data_jurusan'];
+    $alamat = $_POST['data_alamat'];
+
+    $query = "INSERT INTO tbl_siswa(nama, kelas, jurusan, alamat) 
+              VALUES ('$nama','$kelas','$jurusan','$alamat')";
+    
+    if (mysqli_query($koneksi, $query)) {
+        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
+    } else {
+        echo "<div class='alert alert-danger text-center'>
+                Gagal : " . mysqli_error($koneksi) . "
+              </div>";
+    }
+}
+?>
+          </div>
+        </div>
+      </div>
+     
+      <footer class="footer pt-3  ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>,
+                made with <i class="fa fa-heart"></i> by
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                for a better web.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
