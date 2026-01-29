@@ -1,6 +1,37 @@
 <?php
-include("header.php");
 include("config.php");
+//ambil id dari url
+//kalau diurl ada id, simpan ke var $id
+//kalau gaada, isi var $id dengan null, jadi $id = null
+$id = $_GET['id'] ?? null;
+
+
+
+//ambil id 
+if ($id) {
+    $query = mysqli_query($koneksi,"SELECT * FROM `tbl_siswa` WHERE id_siswa = '$id'");
+    $siswa = mysqli_fetch_assoc($query);
+//mysqli_fecth_assoc akan mengambil 1 baris data hasil dari query
+
+}
+//update
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $nama  = $_POST['data_nama'];
+    $kelas = $_POST['data_kelas'];
+    $jurusan = $_POST['data_jurusan'];
+    $alamat = $_POST['data_alamat'];
+
+    mysqli_query($koneksi, "UPDATE tbl_siswa set nama='$nama',
+    kelas= '$kelas', jurusan='$jurusan', alamat='$alamat' where id_siswa = '$id'");
+
+    header("location: siswa.php");
+    exit;
+  }
+
+
+
+include("header.php");
 ?>
 
 
@@ -11,32 +42,28 @@ include("config.php");
         <div class="col-12">
           <div class="card mb-1">
             <div class="card-header pb-0">
-              <h6>Authors Form</h6>
+              <h6>Authors Form Edit</h6>
               <form method="Post">
                 <div class="form-group">
                     <label for="example-text-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" value="" id="" >
+                    <input class="form-control" name="data_nama" type="text" value="<?= $siswa['nama'] ?>">
                 </div>
                  <div class="form-group">
                     <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="data_kelas" >
-                    <option>X-1</option>
-                    <option>X-2</option>
-                    <option>X-3</option>
-                    
-                    </select>
+                    <input class="form-control"name="data_kelas" value="<?= $siswa['kelas'] ?>">
+                  
                 </div>
                 <div class="form-group">
                     <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
-                    <input class="form-control" name="data_jurusan" type="text" id="">
+                    <input class="form-control" name="data_jurusan" type="text" value="<?= $siswa['jurusan'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
-                    <input class="form-control" name="data_alamat" type="text" value="" id="">
+                    <input class="form-control" name="data_alamat" type="text" value="<?= $siswa['alamat'] ?>" >
                 </div>
 
                  <div class="text-center mt-4 mb-3">
-                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-primary">
+                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-danger">
                                         <i class="fa-solid fa-paper-plane"></i></i>Input Data
                                     </button>
                  </div>

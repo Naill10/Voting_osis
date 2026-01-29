@@ -36,7 +36,7 @@ include("config.php");
            
             <div class="card-header pb-0 d-flex flex-column">
             
-                 <a href="tambah_siswa.php"><button type="button" class="btn bg-gradient-primary" >Tambah Siswa</button></a>
+                 <a href="tambah_admin.php"><button type="button" class="btn bg-gradient-primary" >Tambah Admin</button></a>
               
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -47,11 +47,11 @@ include("config.php");
                       <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                         No
                       </td>  
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Siswa</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Lahir</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NISN</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Password</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                     
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>
@@ -59,7 +59,7 @@ include("config.php");
 
 
                     $no =1;
-                    $data = mysqli_query($koneksi, "SELECT * FROM tbl_siswa");
+                    $data = mysqli_query($koneksi, "SELECT * FROM tbl_admin");
                      foreach($data as $row):
                   ?>
                   <tbody>
@@ -74,32 +74,30 @@ include("config.php");
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $row['nama']; ?></h6>
+                            <h6 class="mb-0 text-sm"><?php echo $row['username']; ?></h6>
 
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['kelas']; ?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['password']; ?></p>
                         
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['jurusan']; ?></span>
+                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['nama']; ?></span>
                       </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
+                    
                         <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['alamat']; ?></span>
                       </td>
-                      <td class="align-middle text-center">
-                       <a href="edit_siswa.php?id=<?= $row['id_siswa']; ?>"
+                   <td class="align-middle text-center">
+                       <a href="edit_admin.php?id=<?= $row['id_admin']; ?>"
                        class="btn btn-sm btn bg-gradient-warning">
-                       Edit
+                       edit
                       </a>
-                      <a href="delete_siswa.php?id=<?= $row['id_siswa']; ?>"
+                        <a href="delete_admin.php?id=<?= $row['id_admin']; ?>"
                        class="btn btn-sm btn bg-danger text-white">
-                       Delete
+                      delete
                       </a>
                       </td>
                     </tr>
