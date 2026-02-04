@@ -1,34 +1,47 @@
 <?php
-include("config.php");
+include "../header/config.php";
+//ambil id dari url
+//kalau diurl ada id, simpan ke var $id
+//kalau gaada, isi var $id dengan null, jadi $id = null
 
 $id = $_GET['id'] ?? null;
 
+$current_page = basename($_SERVER["PHP_SELF"]);
+
+//$current_page = siswa.php (isi dari alamat)
+//$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
+//basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
+
+
+
 //ambil id 
 if ($id) {
-    $query = mysqli_query($koneksi,"SELECT * FROM `tbl_voting` WHERE id_calon = '$id'");
+    $query = mysqli_query($koneksi,"SELECT * FROM `tbl_siswa` WHERE id_siswa = '$id'");
     $siswa = mysqli_fetch_assoc($query);
 //mysqli_fecth_assoc akan mengambil 1 baris data hasil dari query
 
 }
+//update$
+$berhasil = false;
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+    $nama  = $_POST['data_nama'];
+    $kelas = $_POST['data_kelas'];
+    $jurusan = $_POST['data_jurusan'];
+    $alamat = $_POST['data_alamat'];
 
-    $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
+   $query= mysqli_query($koneksi, "UPDATE tbl_siswa set nama='$nama',
+    kelas= '$kelas', jurusan='$jurusan', alamat='$alamat' where id_siswa = '$id'");
 
-
-    mysqli_query($koneksi, "UPDATE tbl_voting set nama_calon='$calon_ketua',
-    visi= '$pos_visi', misi='$pos_misi', foto='$pos_foto' where id_calon = '$id'");
-
-    header("location: calon_ketua.php");
-    exit;
+   
+    if ($query) {
+        $berhasil = true;
+    }
   }
 
 
 
-include("header.php");
+include "../header/header.php";
 ?>
 
 
@@ -39,28 +52,28 @@ include("header.php");
         <div class="col-12">
           <div class="card mb-1">
             <div class="card-header pb-0">
-              <h6>Authors Form</h6>
+              <h6>Authors Form Edit</h6>
               <form method="Post">
                 <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Nama Calon</label>
-                    <input class="form-control" name="nama_calon" type="text" value="<?= $siswa['nama_calon'] ?>">
+                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
+                    <input class="form-control" name="data_nama" type="text" value="<?= $siswa['nama'] ?>">
                 </div>
                  <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Visi</label>
-                    <input class="form-control" id="exampleFormControlSelect1" name="visi" type="" value="<?= $siswa['visi'] ?>" >
-                 
+                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
+                    <input class="form-control"name="data_kelas" value="<?= $siswa['kelas'] ?>">
+                  
                 </div>
                 <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Misi</label>
-                    <input class="form-control" name="misi" type="text" value="<?= $siswa['misi'] ?>">
+                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
+                    <input class="form-control" name="data_jurusan" type="text" value="<?= $siswa['jurusan'] ?>">
                 </div>
                 <div class="form-group">
-                    <label for="example-url-input" class="form-control-label mx-3">Foto</label>
-                    <input class="form-control" name="foto" type="text" value="<?= $siswa['foto'] ?>" id="">
+                    <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
+                    <input class="form-control" name="data_alamat" type="text" value="<?= $siswa['alamat'] ?>" >
                 </div>
 
                  <div class="text-center mt-4 mb-3">
-                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-secondary">
+                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-danger">
                                         <i class="fa-solid fa-paper-plane"></i></i>Input Data
                                     </button>
                  </div>
@@ -68,26 +81,7 @@ include("header.php");
             </form>
             </div>
             
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
-
-    $query = "INSERT INTO `tbl_voting`(nama_calon,visi,misi,foto) 
-VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
-    } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
-    }
-}
-?>
           </div>
         </div>
       </div>
@@ -123,5 +117,19 @@ VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
             </div>
           </div>
         </div>
+
+<?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "siswa.php";
+});
+</script>
+<?php } ?>
+
       </footer>
     </div>

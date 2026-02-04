@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include "../header/config.php";
 
 
 
@@ -11,7 +11,7 @@ mysqli_query($koneksi ,"DELETE FROM tbl_voting WHERE id_calon='$id'");
 
 //kembali ke halamaan siswa
 
-header("Location: calon_ketua.php");
+header("Location: ../calon_ketua/calon_ketua.php");
 exit;
 
 

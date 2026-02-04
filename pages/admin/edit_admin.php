@@ -1,8 +1,14 @@
 <?php
-include("config.php");
+include "../header/config.php";
 
 
 $id = $_GET['id'] ?? null;
+
+$current_page = basename($_SERVER["PHP_SELF"]);
+
+//$current_page = siswa.php (isi dari alamat)
+//$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
+//basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
 
 //ambil id 
 if ($id) {
@@ -12,6 +18,7 @@ if ($id) {
 
 }
 //update
+$berhasil = false;
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $username = $_POST['data_username'];
@@ -22,11 +29,12 @@ if ($id) {
     mysqli_query($koneksi, "UPDATE tbl_admin set username='$username',
     password= '$password', nama='$nama', alamat='$alamat' where id_admin = '$id'");
 
-    header("location: admin.php");
-    exit;
+    if ($query) {
+        $berhasil = true;
+    }
   }
 
-include("header.php");
+include "../header/header.php";
 ?>
 
 
@@ -66,26 +74,7 @@ include("header.php");
             </form>
             </div>
             
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $username = $_POST['data_username'];
-    $password = $_POST['data_password'];
-    $nama = $_POST['data_nama'];
-    $alamat = $_POST['alamat'];
-
-    $query = "INSERT INTO `tbl_admin`(username,password,nama,alamat) 
-VALUES ('$username','$password','$nama','$alamat')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
-    } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
-    }
-}
-?>
           </div>
         </div>
       </div>
@@ -122,4 +111,20 @@ VALUES ('$username','$password','$nama','$alamat')";
           </div>
         </div>
       </footer>
+
+      <?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "admin.php";
+});
+</script>
+<?php } ?>
+
+      </footer>
+    </div>
     </div>

@@ -1,6 +1,12 @@
 <?php
-include("header.php");
-include("config.php");
+include "../header/header.php";
+include "../header/config.php";
+
+$current_page = basename($_SERVER["PHP_SELF"]);
+
+//$current_page = siswa.php (isi dari alamat)
+//$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
+//basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
 ?>
 
 
@@ -8,8 +14,8 @@ include("config.php");
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
     Soft UI Dashboard 3 by Creative Tim
   </title>
@@ -21,7 +27,7 @@ include("config.php");
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -36,7 +42,7 @@ include("config.php");
            
             <div class="card-header pb-0 d-flex flex-column">
             
-                 <a href="tambah_calon.php"><button type="button" class="btn bg-gradient-primary" >Tambah Calon Ketua</button></a>
+                 <a href="tambah_admin.php"><button type="button" class="btn bg-gradient-primary" >Tambah Admin</button></a>
               
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -47,11 +53,11 @@ include("config.php");
                       <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                         No
                       </td>  
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Calon</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Visi</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Misi</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
-                      
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Password</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                     
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>
@@ -59,7 +65,7 @@ include("config.php");
 
 
                     $no =1;
-                    $data = mysqli_query($koneksi, "SELECT * FROM tbl_voting");
+                    $data = mysqli_query($koneksi, "SELECT * FROM tbl_admin");
                      foreach($data as $row):
                   ?>
                   <tbody>
@@ -70,35 +76,35 @@ include("config.php");
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                            <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $row['nama_calon']; ?></h6>
+                            <h6 class="mb-0 text-sm"><?php echo $row['username']; ?></h6>
 
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['visi']; ?></p>
+                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['password']; ?></p>
                         
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['misi']; ?></span>
+                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['nama']; ?></span>
                       </td>
-                      
+                    
                         <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['foto']; ?></span>
+                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['alamat']; ?></span>
                       </td>
-                     <td class="align-middle text-center">
-                       <a href="edit_calon.php?id=<?= $row['id_calon']; ?>"
+                   <td class="align-middle text-center">
+                       <a href="edit_admin.php?id=<?= $row['id_admin']; ?>"
                        class="btn btn-sm btn bg-gradient-warning">
                        edit
                       </a>
-                      
-                      <a href="delete_calon.php?id=<?= $row['id_calon']; ?>"
-                       class="btn btn-sm btn bg-danger text-white">
-                      delete
+                        <a href="#" 
+                        class="btn btn-sm btn bg-danger text-white"
+                        onclick="HapusSiswa(<?= $row['id_admin']; ?>)">
+                        Delete
                       </a>
                       </td>
                     </tr>
@@ -149,4 +155,42 @@ include("config.php");
       </footer>
     </div>
   </main>
+ <script>
+function HapusSiswa(id) {
+  Swal.fire({
+    title: 'Yakin hapus data?',
+    text: 'Data yang dihapus tidak bisa dikembalikan!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Ya, hapus!',
+    cancelButtonText: 'Batal'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Data berhasil dihapus',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+      setTimeout(() => {
+        window.location.href = 'delete_admin.php?id=' + id;
+      }, 2000);
+
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Data tidak jadi dihapus',
+        timer: 1500,
+        showConfirmButton: false
+      });
+
+    }
+  });
+}
+</script>
   </body>

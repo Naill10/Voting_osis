@@ -1,6 +1,14 @@
 <?php
-include("header.php");
-include("config.php");
+include "../header/header.php";
+include "../header/config.php";
+
+
+$current_page = basename($_SERVER["PHP_SELF"]);
+
+//$current_page = siswa.php (isi dari alamat)
+//$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
+//basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
+
 ?>
 
 
@@ -14,25 +22,21 @@ include("config.php");
               <h6>Authors Form</h6>
               <form method="Post">
                 <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" value="" id="" >
+                    <label for="example-text-input" class="form-control-label mx-3">Username</label>
+                    <input class="form-control" name="data_username" type="text" value="" id="" >
                 </div>
                  <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="data_kelas" >
-                    <option>X-1</option>
-                    <option>X-2</option>
-                    <option>X-3</option>
-                    
-                    </select>
+                    <label for="exampleFormControlSelect1" class="mx-3">Password</label>
+                    <input class="form-control" id="exampleFormControlSelect1" name="data_password" type="password" >
+                 
                 </div>
                 <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
-                    <input class="form-control" name="data_jurusan" type="text" id="">
+                    <label for="example-email-input" class="form-control-label mx-3">Name</label>
+                    <input class="form-control" name="data_nama" type="text" id="">
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
-                    <input class="form-control" name="data_alamat" type="text" value="" id="">
+                    <input class="form-control" name="alamat" type="text" value="" id="">
                 </div>
 
                  <div class="text-center mt-4 mb-3">
@@ -45,15 +49,21 @@ include("config.php");
             </div>
             
 <?php
+
+$berhasil = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    $username = $_POST['data_username'];
+    $password = $_POST['data_password'];
+    $nama = $_POST['data_nama'];
+    $alamat = $_POST['alamat'];
 
-    $nama  = $_POST['data_nama'];
-    $kelas = $_POST['data_kelas'];
-    $jurusan = $_POST['data_jurusan'];
-    $alamat = $_POST['data_alamat'];
 
-    $query = "INSERT INTO tbl_siswa(nama, kelas, jurusan, alamat) 
-              VALUES ('$nama','$kelas','$jurusan','$alamat')";
+
+    $query = "INSERT INTO `tbl_admin`(username,password,nama,alamat) 
+VALUES ('$username','$password','$nama','$alamat')";
+
+
     
     if (mysqli_query($koneksi, $query)) {
         echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
@@ -61,6 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<div class='alert alert-danger text-center'>
                 Gagal : " . mysqli_error($koneksi) . "
               </div>";
+    }
+    
+    if ($query) {
+        $berhasil = true;
     }
 }
 ?>
@@ -101,3 +115,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
       </footer>
     </div>
+    <?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "admin.php";
+});
+</script>
+<?php } ?>

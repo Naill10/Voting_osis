@@ -1,15 +1,24 @@
 <?php
-include("header.php");
-include("config.php");
+include "../header/config.php";
+include "../header/header.php";
+
+
+$current_page = basename($_SERVER["PHP_SELF"]);
+
+//$current_page = siswa.php (isi dari alamat)
+//$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
+//basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
+
 ?>
+
 
 
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
     Soft UI Dashboard 3 by Creative Tim
   </title>
@@ -21,7 +30,7 @@ include("config.php");
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -36,7 +45,7 @@ include("config.php");
            
             <div class="card-header pb-0 d-flex flex-column">
             
-                 <a href="tambah_siswa.php"><button type="button" class="btn bg-gradient-primary" >Tambah Siswa</button></a>
+                 <a href="tambah_siswa.php"><button type="button" class="btn bg-gradient-primary" >Vote</button></a>
               
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -70,7 +79,7 @@ include("config.php");
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                            <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center">
@@ -98,7 +107,7 @@ include("config.php");
                        Edit
                       </a>
                       <a href="delete_siswa.php?id=<?= $row['id_siswa']; ?>"
-                       class="btn btn-sm btn bg-danger text-white">
+                       onclick="return confirm('MAU HAPUS DATA INI?')" class="btn btn-sm btn bg-danger text-white">
                        Delete
                       </a>
                       </td>
@@ -150,4 +159,13 @@ include("config.php");
       </footer>
     </div>
   </main>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
   </body>

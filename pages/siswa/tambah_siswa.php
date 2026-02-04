@@ -1,7 +1,29 @@
 <?php
-include("header.php");
-include("config.php");
+include "../header/header.php";
+include "../header/config.php";
+
+$berhasil = false;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $nama    = $_POST['data_nama'];
+    $kelas   = $_POST['data_kelas'];
+    $jurusan = $_POST['data_jurusan'];
+    $alamat  = $_POST['data_alamat'];
+
+    $query = mysqli_query(
+        $koneksi,
+        "INSERT INTO tbl_siswa(nama, kelas, jurusan, alamat)
+         VALUES ('$nama','$kelas','$jurusan','$alamat')"
+    );
+
+    if ($query) {
+        $berhasil = true;
+    }
+}
 ?>
+
+
 
 
 
@@ -14,21 +36,25 @@ include("config.php");
               <h6>Authors Form</h6>
               <form method="Post">
                 <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Nama Calon</label>
-                    <input class="form-control" name="nama_calon" type="text" value="" id="" >
+                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
+                    <input class="form-control" name="data_nama" type="text" value="" id="" required>
                 </div>
                  <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Visi</label>
-                    <input class="form-control" id="exampleFormControlSelect1" name="visi" type="" >
-                 
+                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="data_kelas" required>
+                    <option>X-1</option>
+                    <option>X-2</option>
+                    <option>X-3</option>
+                    
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Misi</label>
-                    <input class="form-control" name="misi" type="text" id="">
+                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
+                    <input class="form-control" name="data_jurusan" type="text" id="" required>
                 </div>
                 <div class="form-group">
-                    <label for="example-url-input" class="form-control-label mx-3">Foto</label>
-                    <input class="form-control" name="foto" type="text" value="" id="">
+                    <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
+                    <input class="form-control" name="data_alamat" type="text" value="" id="" required>
                 </div>
 
                  <div class="text-center mt-4 mb-3">
@@ -40,26 +66,7 @@ include("config.php");
             </form>
             </div>
             
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
-
-    $query = "INSERT INTO `tbl_voting`(nama_calon,visi,misi,foto) 
-VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
-    } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
-    }
-}
-?>
           </div>
         </div>
       </div>
@@ -96,4 +103,17 @@ VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
           </div>
         </div>
       </footer>
-    </div>
+</div>
+
+<?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "siswa.php";
+});
+</script>
+<?php } ?>
