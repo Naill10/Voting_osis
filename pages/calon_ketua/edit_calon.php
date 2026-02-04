@@ -16,9 +16,10 @@ if ($id) {
 //mysqli_fecth_assoc akan mengambil 1 baris data hasil dari query
 
 }
+   $berhasil = false;
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
+  
     $calon_ketua = $_POST['nama_calon'];
     $pos_visi = $_POST['visi'];
     $pos_misi = $_POST['misi'];
@@ -27,9 +28,9 @@ if ($id) {
 
     mysqli_query($koneksi, "UPDATE tbl_voting set nama_calon='$calon_ketua',
     visi= '$pos_visi', misi='$pos_misi', foto='$pos_foto' where id_calon = '$id'");
-
-    header("location: calon_ketua.php");
-    exit;
+    if ($query) {
+        $berhasil = true;
+    }
   }
 
 
@@ -74,26 +75,7 @@ include "../header/header.php";
             </form>
             </div>
             
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
-
-    $query = "INSERT INTO `tbl_voting`(nama_calon,visi,misi,foto) 
-VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
-    } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
-    }
-}
-?>
           </div>
         </div>
       </div>
@@ -130,4 +112,17 @@ VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
           </div>
         </div>
       </footer>
+
+      <?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "calon_ketua.php";
+});
+</script>
+<?php } ?>
     </div>

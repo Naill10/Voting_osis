@@ -93,19 +93,33 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       <td class="align-middle text-center text-sm">
                         <span class="badge badge-sm bg-gradient-success"><?php echo $row['misi']; ?></span>
                       </td>
-                      
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['foto']; ?></span>
-                      </td>
+                     <td class="text-center">
+                          <label style="cursor:pointer;">
+                            <input type="radio"
+                                  name="id_calon"
+                                  value="<?= $row['id_calon']; ?>"
+                                  hidden>
+
+                            <img src="../../assets/foto/<?= $row['foto']; ?>"
+                                width="80"
+                                class="foto-pilih"
+                                style="border-radius:10px; object-fit:cover;">
+                          </label>
+                        </td>
+
+
+
+
                      <td class="align-middle text-center">
                        <a href="edit_calon.php?id=<?= $row['id_calon']; ?>"
                        class="btn btn-sm btn bg-gradient-warning">
                        edit
                       </a>
                       
-                      <a href="delete_calon.php?id=<?= $row['id_calon']; ?>"
-                         onclick="return confirm('MAU HAPUS DATA INI?')" class="btn btn-sm btn bg-danger text-white">
-                      delete
+                       <a href="#" 
+                        class="btn btn-sm btn bg-danger text-white"
+                        onclick="hapussiswa(<?= $row['id_calon']; ?>)">
+                        Delete
                       </a>
                       </td>
                     </tr>
@@ -156,13 +170,42 @@ $current_page = basename($_SERVER["PHP_SELF"]);
       </footer>
     </div>
   </main>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+ <script>
+function hapussiswa(id) {
+  Swal.fire({
+    title: 'Yakin hapus data?',
+    text: 'Data yang dihapus tidak bisa dikembalikan!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Ya, hapus!',
+    cancelButtonText: 'Batal'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Data berhasil dihapus',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+      setTimeout(() => {
+        window.location.href = 'delete_calon.php?id=' + id;
+      }, 2000);
+
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Data tidak jadi dihapus',
+        timer: 1500,
+        showConfirmButton: false
+      });
+
     }
-  </script>
+  });
+}
+</script>
   </body>

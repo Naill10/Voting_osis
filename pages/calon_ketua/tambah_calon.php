@@ -8,6 +8,22 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 //$current_page = siswa.php (isi dari alamat)
 //$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
 //basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
+  $berhasil = false;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $calon_ketua = $_POST['nama_calon'];
+    $pos_visi = $_POST['visi'];
+    $pos_misi = $_POST['misi'];
+    $pos_foto = $_POST['foto'];
+
+
+    $query = mysqli_query($koneksi, "INSERT INTO tbl_voting 
+    (nama_calon, visi, misi, foto)
+    VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')");
+
+    if ($query) {
+      $berhasil = true;
+}}
 ?>
 
 
@@ -19,7 +35,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
           <div class="card mb-1">
             <div class="card-header pb-0">
               <h6>Authors Form</h6>
-              <form method="Post">
+              <form method="Post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="example-text-input" class="form-control-label mx-3">Nama Calon</label>
                     <input class="form-control" name="nama_calon" type="text" value="" id="" >
@@ -35,7 +51,8 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Foto</label>
-                    <input class="form-control" name="foto" type="text" value="" id="">
+                    <input class="form-control" name="foto" type="file">
+
                 </div>
 
                  <div class="text-center mt-4 mb-3">
@@ -47,26 +64,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
             </form>
             </div>
             
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
-
-    $query = "INSERT INTO `tbl_voting`(nama_calon,visi,misi,foto) 
-VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
-    } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
-    }
-}
-?>
           </div>
         </div>
       </div>
@@ -104,3 +102,16 @@ VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')";
         </div>
       </footer>
     </div>
+
+    <?php if ($berhasil) { ?>
+<script>
+Swal.fire({
+  icon: 'success',
+  title: 'Data Berhasil Input!',
+  showConfirmButton: false,
+  timer: 2000
+}).then(() => {
+  window.location.href = "calon_ketua.php";
+});
+</script>
+<?php } ?>
