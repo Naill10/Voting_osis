@@ -1,6 +1,7 @@
 
 <?php 
 include "../header/header.php";
+include "../header/config.php";
 
 $current_page = basename($_SERVER["PHP_SELF"]);
 
@@ -22,9 +23,14 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                         <i class="ni ni-circle-08 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
                       </div>
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        1600
+                        <?php
+                        $query = mysqli_query($koneksi, "select COUNT(id_calon) as Jumlah_calon FROM tbl_voting;");
+
+                        $calon = mysqli_fetch_assoc($query); // mengambil data dari hasil query
+                        echo $calon['Jumlah_calon'];
+                      ?>
                       </h5>
-                      <span class="text-white text-sm">Users Active</span>
+                      <span class="text-white text-sm">Jumlah Calon</span>
                     </div>
                     <div class="col-4">
                       <div class="dropdown text-end mb-6">
@@ -53,9 +59,9 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                         <i class="ni ni-active-40 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
                       </div>
                       <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        357
+                      -8767%
                       </h5>
-                      <span class="text-white text-sm">Click Events</span>
+                      <span class="text-white text-sm">Users</span>
                     </div>
                     <div class="col-4">
                       <div class="dropstart text-end mb-6">
@@ -68,7 +74,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                           <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
                         </ul>
                       </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
+                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">-+</p>
                     </div>
                   </div>
                 </div>

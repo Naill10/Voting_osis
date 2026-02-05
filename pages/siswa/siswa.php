@@ -58,8 +58,8 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       </td>  
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Siswa</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Lahir</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NISN</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
@@ -79,7 +79,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                            <img src="../../assets/img/<?php echo $row['foto']; ?>" class="avatar avatar-sm me-3" alt="user1" width="500" height="500" class="rounded-circle">
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center">
@@ -96,7 +96,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                         <span class="badge badge-sm bg-gradient-success"><?php echo $row['jurusan']; ?></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['email']; ?></span>
                       </td>
                         <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['alamat']; ?></span>

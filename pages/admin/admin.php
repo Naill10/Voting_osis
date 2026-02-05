@@ -7,6 +7,9 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 //$current_page = siswa.php (isi dari alamat)
 //$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
 //basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
+
+
+
 ?>
 
 
@@ -55,9 +58,10 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       </td>  
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Username</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Password</th>
+                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
-                     
+                      
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>
@@ -76,7 +80,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
-                            <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                            <img src="../../assets/img/<?php echo $row['foto']; ?>" class="avatar avatar-sm me-3" alt="user1">
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center">
@@ -88,6 +92,9 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       <td>
                         <p class="text-xs font-weight-bold mb-0"><?php echo $row['password']; ?></p>
                         
+                      </td>
+                       <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold"><?php echo $row['email']; ?></span>
                       </td>
                       <td class="align-middle text-center text-sm">
                         <span class="badge badge-sm bg-gradient-success"><?php echo $row['nama']; ?></span>

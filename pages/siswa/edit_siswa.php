@@ -28,22 +28,50 @@ $berhasil = false;
     $nama  = $_POST['data_nama'];
     $kelas = $_POST['data_kelas'];
     $jurusan = $_POST['data_jurusan'];
-    $alamat = $_POST['data_alamat'];
+    $alamat = $_POST['data_alamat'];    
+   // CEK UPLOAD FOTO
+    if (!empty($_FILES['foto']['name'])) {
+        $folder   = "../../assets/img/";
+        $namaFile = $_FILES['foto']['name'];
+        $tmpFile  = $_FILES['foto']['tmp_name'];
 
-   $query= mysqli_query($koneksi, "UPDATE tbl_siswa set nama='$nama',
-    kelas= '$kelas', jurusan='$jurusan', alamat='$alamat' where id_siswa = '$id'");
+        $namabaru = time() . "_" . $namaFile;
+        move_uploaded_file($tmpFile, $folder . $namabaru);
+
+        // UPDATE DENGAN FOTO
+        $sql = "UPDATE tbl_siswa SET
+                nama='$nama',
+                kelas='$kelas',
+                jurusan='$jurusan',
+                alamat='$alamat',
+                foto='$namabaru'
+                WHERE id_siswa='$id'";
+
+    } else {
+
+        // UPDATE TANPA FOTO
+        $sql = "UPDATE tbl_siswa SET
+                nama='$nama',
+                kelas='$kelas',
+                jurusan='$jurusan',
+                alamat='$alamat'
+                WHERE id_siswa='$id'";
+    }
+
+
+   $query= mysqli_query($koneksi, $sql);
 
    
     if ($query) {
         $berhasil = true;
     }
-  }
 
 
+ }
 
 include "../header/header.php";
 ?>
-
+ 
 
 
 
@@ -53,32 +81,88 @@ include "../header/header.php";
           <div class="card mb-1">
             <div class="card-header pb-0">
               <h6>Authors Form Edit</h6>
-              <form method="Post">
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" value="<?= $siswa['nama'] ?>">
-                </div>
-                 <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
-                    <input class="form-control"name="data_kelas" value="<?= $siswa['kelas'] ?>">
-                  
-                </div>
-                <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
-                    <input class="form-control" name="data_jurusan" type="text" value="<?= $siswa['jurusan'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
-                    <input class="form-control" name="data_alamat" type="text" value="<?= $siswa['alamat'] ?>" >
-                </div>
+              <form method="POST" enctype="multipart/form-data">
 
-                 <div class="text-center mt-4 mb-3">
-                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-danger">
-                                        <i class="fa-solid fa-paper-plane"></i></i>Input Data
-                                    </button>
-                 </div>
-  
-            </form>
+  <!-- Nama -->
+  <div class="form-group mb-3">
+    <label class="form-control-label mx-3">Name</label>
+    <input
+      type="text"
+      name="data_nama"
+      class="form-control"
+      value="<?= $siswa['nama']; ?>"
+      required
+    >
+  </div>
+
+  <!-- Foto -->
+  <div class="form-group mb-4">
+    <label class="form-control-label mx-3 d-block">Foto Sebelumnya</label>
+
+    <img
+      src="../../assets/img/<?= $siswa['foto']; ?>"
+      width="100"
+      alt="Foto Siswa"
+      class="rounded mb-2 d-block"
+    >
+
+    <input
+      type="file"
+      name="foto"
+      class="form-control"
+      accept="image/*"
+    >
+  </div>
+
+  <!-- Kelas -->
+  <div class="form-group mb-3">
+    <label class="mx-3">Kelas</label>
+    <input
+      type="text"
+      name="data_kelas"
+      class="form-control"
+      value="<?= $siswa['kelas']; ?>"
+      required
+    >
+  </div>
+
+  <!-- Jurusan -->
+  <div class="form-group mb-3">
+    <label class="form-control-label mx-3">Jurusan</label>
+    <input
+      type="text"
+      name="data_jurusan"
+      class="form-control"
+      value="<?= $siswa['jurusan']; ?>"
+      required
+    >
+  </div>
+
+  <!-- Alamat -->
+  <div class="form-group mb-4">
+    <label class="form-control-label mx-3">Alamat</label>
+    <input
+      type="text"
+      name="data_alamat"
+      class="form-control"
+      value="<?= $siswa['alamat']; ?>"
+      required
+    >
+  </div>
+
+  <!-- Button -->
+  <div class="text-center">
+    <button
+      type="submit"
+      class="btn btn-lg bg-gradient-danger px-5"
+    >
+      <i class="fa-solid fa-paper-plane me-2"></i>
+      Input Data
+    </button>
+  </div>
+
+</form>
+
             </div>
             
 

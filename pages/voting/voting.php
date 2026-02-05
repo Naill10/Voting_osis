@@ -53,15 +53,15 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
+                      <!-- <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">
                         No
-                      </td>  
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Siswa</th>
+                      </td>   -->
+                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Siswa</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Lahir</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NISN</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th> -->
                     </tr>
                   </thead>
                   <?php 
@@ -72,7 +72,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                      foreach($data as $row):
                   ?>
                   <tbody>
-                    <tr>
+                    <!-- <tr>
                         <td class="text-center text-sm">
                         <span class="badge badge-sm bg-gradient-success"><?php echo $no++; ?></span>
                       </td>
@@ -111,7 +111,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                        Delete
                       </a>
                       </td>
-                    </tr>
+                    </tr> -->
                  
                   </tbody>
                   <?php endforeach; ?>

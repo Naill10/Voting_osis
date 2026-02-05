@@ -25,9 +25,36 @@ $berhasil = false;
     $password = $_POST['data_password'];
     $nama = $_POST['data_nama'];
     $alamat = $_POST['alamat'];
+ 
 
-    mysqli_query($koneksi, "UPDATE tbl_admin set username='$username',
-    password= '$password', nama='$nama', alamat='$alamat' where id_admin = '$id'");
+       // CEK UPLOAD FOTO
+    if (!empty($_FILES['foto']['name'])) {
+        $folder   = "../../assets/img/";
+        $namaFile = $_FILES['foto']['name'];
+        $tmpFile  = $_FILES['foto']['tmp_name'];
+
+        $namabaru = time() . "_" . $namaFile;
+        move_uploaded_file($tmpFile, $folder . $namabaru);
+
+        // UPDATE DENGAN FOTO
+        $sql = "UPDATE tbl_admin SET
+                username='$nama',
+                password='$password',
+                nama='$nama',
+                alamat='$alamat',
+                foto='$namabaru'
+                WHERE id_admin='$id'";
+
+    } else {
+
+        // UPDATE TANPA FOTO
+        $sql = "UPDATE tbl_admin SET
+                nama='$nama',
+                alamat='$alamat'
+                WHERE id_admin='$id'";
+    }
+
+    $query= mysqli_query($koneksi, $sql);
 
     if ($query) {
         $berhasil = true;
@@ -46,10 +73,16 @@ include "../header/header.php";
           <div class="card mb-1">
             <div class="card-header pb-0">
               <h6>Authors Form</h6>
-              <form method="Post">
+              <form method="Post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="example-text-input" class="form-control-label mx-3">Username</label>
                     <input class="form-control" name="data_username" type="text" value="<?= $siswa['username'] ?>">
+                    <div>
+                    <label class="form-control-label mx-3 d-block">Foto Sebelumnya</label>
+                   
+                    <img src="../../assets/img/<?= $siswa['foto']; ?>" alt="" width="100px"> 
+                    <input type="file" name="foto" class="form-control mb-3" >
+                    </div>
                 </div>
                  <div class="form-group">
                     <label for="exampleFormControlSelect1" class="mx-3">Password</label>

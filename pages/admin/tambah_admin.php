@@ -20,19 +20,27 @@ $current_page = basename($_SERVER["PHP_SELF"]);
           <div class="card mb-1">
             <div class="card-header pb-0">
               <h6>Authors Form</h6>
-              <form method="Post">
+              <form method="Post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Username</label>
-                    <input class="form-control" name="data_username" type="text" value="" id="" >
+                    
+                  
+                   <label for="example-text-input" class="form-control-label mx-3">Username</label>
+                    <input class="form-control mb-4" name="data_username" type="text" value="" id="" > 
+                    <input type="file" name="foto" class="form-control mb-3" required>
                 </div>
                  <div class="form-group">
                     <label for="exampleFormControlSelect1" class="mx-3">Password</label>
                     <input class="form-control" id="exampleFormControlSelect1" name="data_password" type="password" >
                  
                 </div>
+               
                 <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" id="">
+                    <label for="example-email-input" class="form-control-label mx-3">Email</label>
+                    <input class="form-control" name="email" type="email" id="">
+                </div>
+              <div class="form-group">
+                    <label for="example-url-input" class="form-control-label mx-3">Nama</label>
+                    <input class="form-control" name="data_nama" type="text" value="" id="">
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
@@ -55,22 +63,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $username = $_POST['data_username'];
     $password = $_POST['data_password'];
+    $email = $_POST['email'];
     $nama = $_POST['data_nama'];
     $alamat = $_POST['alamat'];
 
 
 
-    $query = "INSERT INTO `tbl_admin`(username,password,nama,alamat) 
-VALUES ('$username','$password','$nama','$alamat')";
+    $foto = $_FILES['foto']['name'];
+    $tmp_foto = $_FILES['foto']['tmp_name'];
+
+    $folder = "../../assets/img/";
+    move_uploaded_file($tmp_foto, $folder . $foto);
+
+    $query = "INSERT INTO `tbl_admin`(foto,username,password,email,nama,alamat) 
+        VALUES ('$foto','$username','$password','$email','$nama','$alamat')";
 
 
     
     if (mysqli_query($koneksi, $query)) {
-        echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
+        // echo "<div class='alert alert-success text-center'>Data Berhasil Disimpan</div>";
     } else {
-        echo "<div class='alert alert-danger text-center'>
-                Gagal : " . mysqli_error($koneksi) . "
-              </div>";
+        // echo "<div class='alert alert-danger text-center'>
+        //         Gagal : " . mysqli_error($koneksi) . "
+        //       </div>";
     }
     
     if ($query) {

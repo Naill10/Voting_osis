@@ -59,7 +59,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Misi</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
                       
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                     
                     </tr>
                   </thead>
                   <?php 
@@ -70,62 +70,72 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                      foreach($data as $row):
                   ?>
                   <tbody>
-                    <tr>
-                        <td class="text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success"><?php echo $no++; ?></span>
-                      </td>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
-                            
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $row['nama_calon']; ?></h6>
+  <tr>
+    <!-- No -->
+    <td class="text-center text-sm">
+      <span class="badge badge-sm bg-gradient-success">
+        <?php echo $no++; ?>
+      </span>
+    </td>
 
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['visi']; ?></p>
-                        
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['misi']; ?></span>
-                      </td>
-                     <td class="text-center">
-                          <label style="cursor:pointer;">
-                            <input type="radio"
-                                  name="id_calon"
-                                  value="<?= $row['id_calon']; ?>"
-                                  hidden>
+    <!-- Foto & Nama -->
+    <td>
+      <div class="d-flex align-items-center">
+        <div class="me-3">
+          <label for="foto-<?php echo $row['id_calon']; ?>">
+            <img
+              src="../../assets/img/<?php echo $row['foto']; ?>"
+              width="50"
+              height="50"
+              class="rounded-circle"
+            >
+          </label>
+        </div>
 
-                            <img src="../../assets/foto/<?= $row['foto']; ?>"
-                                width="80"
-                                class="foto-pilih"
-                                style="border-radius:10px; object-fit:cover;">
-                          </label>
-                        </td>
+        <div class="d-flex flex-column justify-content-center">
+          <h6 class="mb-0 text-sm">
+            <?php echo $row['nama_calon']; ?>
+          </h6>
+        </div>
+      </div>
+    </td>
 
+    <!-- Visi -->
+    <td>
+      <p class="text-xs font-weight-bold mb-0">
+        <?php echo $row['visi']; ?>
+      </p>
+    </td>
 
+    <!-- Misi -->
+    <td class="align-middle text-center text-sm">
+      <span class="badge badge-sm bg-gradient-success">
+        <?php echo $row['misi']; ?>
+      </span>
+    </td>
 
+    <!-- Action -->
+    <td class="align-middle text-center">
+      <a
+        href="edit_calon.php?id=<?= $row['id_calon']; ?>"
+        class="btn btn-sm bg-gradient-warning me-1"
+      >
+        Edit
+      </a>
 
-                     <td class="align-middle text-center">
-                       <a href="edit_calon.php?id=<?= $row['id_calon']; ?>"
-                       class="btn btn-sm btn bg-gradient-warning">
-                       edit
-                      </a>
-                      
-                       <a href="#" 
-                        class="btn btn-sm btn bg-danger text-white"
-                        onclick="hapussiswa(<?= $row['id_calon']; ?>)">
-                        Delete
-                      </a>
-                      </td>
-                    </tr>
-                 
-                  </tbody>
-                  <?php endforeach; ?>
+      <a
+        href="#"
+        class="btn btn-sm bg-danger text-white"
+        onclick="hapussiswa(<?= $row['id_calon']; ?>)"
+      >
+        Delete
+      </a>
+    </td>
+  </tr>
+</tbody>
+
+<?php endforeach; ?>
+
                        
 
 

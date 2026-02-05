@@ -11,27 +11,54 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 
 //ambil id 
 if ($id) {
-    $query = mysqli_query($koneksi,"SELECT * FROM `tbl_voting` WHERE id_calon = '$id'");
+    $query = mysqli_query($koneksi, "SELECT * FROM tbl_voting WHERE id_calon='$id'");
     $siswa = mysqli_fetch_assoc($query);
 //mysqli_fecth_assoc akan mengambil 1 baris data hasil dari query
 
 }
-   $berhasil = false;
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  
+$berhasil = false;
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $calon_ketua = $_POST['nama_calon'];
-    $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
+    $pos_visi    = $_POST['visi'];
+    $pos_misi    = $_POST['misi'];
 
+    // CEK UPLOAD FOTO
+    if (!empty($_FILES['foto']['name'])) {
 
-    mysqli_query($koneksi, "UPDATE tbl_voting set nama_calon='$calon_ketua',
-    visi= '$pos_visi', misi='$pos_misi', foto='$pos_foto' where id_calon = '$id'");
+        $folder   = "../../assets/img/";
+        $namaFile = $_FILES['foto']['name'];
+        $tmpFile  = $_FILES['foto']['tmp_name'];
+
+        $namabaru = time() . "_" . $namaFile;
+        move_uploaded_file($tmpFile, $folder . $namabaru);
+
+        // UPDATE DENGAN FOTO
+        $sql = "UPDATE tbl_voting SET
+                nama_calon='$calon_ketua',
+                visi='$pos_visi',
+                misi='$pos_misi',
+                foto='$namabaru'
+                WHERE id_calon='$id'";
+
+    } else {
+
+        // UPDATE TANPA FOTO
+        $sql = "UPDATE tbl_voting SET
+                nama_calon='$calon_ketua',
+                visi='$pos_visi',
+                misi='$pos_misi'
+                WHERE id_calon='$id'";
+    }
+
+    $query = mysqli_query($koneksi, $sql);
+
     if ($query) {
         $berhasil = true;
     }
-  }
+}
 
 
 
@@ -47,32 +74,71 @@ include "../header/header.php";
           <div class="card mb-1">
             <div class="card-header pb-0">
               <h6>Authors Form</h6>
-              <form method="Post">
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Nama Calon</label>
-                    <input class="form-control" name="nama_calon" type="text" value="<?= $siswa['nama_calon'] ?>">
-                </div>
-                 <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Visi</label>
-                    <input class="form-control" id="exampleFormControlSelect1" name="visi" type="" value="<?= $siswa['visi'] ?>" >
-                 
-                </div>
-                <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Misi</label>
-                    <input class="form-control" name="misi" type="text" value="<?= $siswa['misi'] ?>">
-                </div>
-                <div class="form-group">
-                    <label for="example-url-input" class="form-control-label mx-3">Foto</label>
-                    <input class="form-control" name="foto" type="text" value="<?= $siswa['foto'] ?>" id="">
-                </div>
+              <form method="POST" enctype="multipart/form-data">
 
-                 <div class="text-center mt-4 mb-3">
-                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-secondary">
-                                        <i class="fa-solid fa-paper-plane"></i></i>Input Data
-                                    </button>
-                 </div>
-  
-            </form>
+  <div class="form-group">
+    <label class="form-control-label mx-3">Nama Calon</label>
+    <input
+      class="form-control"
+      name="nama_calon"
+      type="text"
+      value="<?= $siswa['nama_calon'] ?>"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label class="mx-3">Visi</label>
+    <input
+      class="form-control"
+      name="visi"
+      type="text"
+      value="<?= $siswa['visi'] ?>"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label class="form-control-label mx-3">Misi</label>
+    <input
+      class="form-control"
+      name="misi"
+      type="text"
+      value="<?= $siswa['misi'] ?>"
+      required
+    >
+  </div>
+
+  <!-- FOTO LAMA -->
+  <div class="form-group">
+    <label class="form-control-label mx-3">Foto Saat Ini</label><br>
+    <img
+      src="../../assets/img/<?= $siswa['foto'] ?>"
+      width="100"
+      class="rounded mb-2"
+    >
+  </div>
+
+  <!-- FOTO BARU -->
+  <div class="form-group">
+    <label class="form-control-label mx-3">Ganti Foto</label>
+    <input
+      class="form-control"
+      name="foto"
+      type="file"
+      accept="image/*"
+    >
+  </div>
+
+  <div class="text-center mt-4 mb-3">
+    <button type="submit" class="btn btn-lg bg-gradient-secondary">
+      <i class="fa-solid fa-paper-plane me-2"></i>
+      Update Data
+    </button>
+  </div>
+
+</form>
+
             </div>
             
 

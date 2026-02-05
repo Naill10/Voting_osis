@@ -14,12 +14,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calon_ketua = $_POST['nama_calon'];
     $pos_visi = $_POST['visi'];
     $pos_misi = $_POST['misi'];
-    $pos_foto = $_POST['foto'];
+    
+
+    // folder upload
+    $folder = "../../assets/img/";
+
+    // ambil data
+    $namaFile = $_FILES["foto"]["name"]; // untuk ngambil nama file
+    $tmpFile = $_FILES["foto"]["tmp_name"]; // untuk ambil lokasi sementara
+
+
+    // $_FILES['foto']['name'];
+    //$_FILES adalah variable bawaan PHP untuk menampung data file yang diupload.
+    //[foto] : name yang ada di form . [name] untuk mengambil asli file yang diupload oleh user.
+
+    //bikin nama unik agar tidak nabrak 
+    $namabaru = time() . "_" . $namaFile;
+
+    //pindahkan filenya
+
+    move_uploaded_file($tmpFile, $folder . $namabaru);
+    $berhasil = true;
+
+
+
+
+
 
 
     $query = mysqli_query($koneksi, "INSERT INTO tbl_voting 
     (nama_calon, visi, misi, foto)
-    VALUES ('$calon_ketua','$pos_visi','$pos_misi','$pos_foto')");
+    VALUES ('$calon_ketua','$pos_visi','$pos_misi','$namabaru')");
 
     if ($query) {
       $berhasil = true;

@@ -10,16 +10,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kelas   = $_POST['data_kelas'];
     $jurusan = $_POST['data_jurusan'];
     $alamat  = $_POST['data_alamat'];
+    $email   = $_POST['data_email'];
+   
+   $file = "../../assets/img/";
 
-    $query = mysqli_query(
-        $koneksi,
-        "INSERT INTO tbl_siswa(nama, kelas, jurusan, alamat)
-         VALUES ('$nama','$kelas','$jurusan','$alamat')"
-    );
+   // ambil data
+    $namaFile = $_FILES["foto"]["name"]; // untuk ngambil nama file
+    $tmpFile = $_FILES["foto"]["tmp_name"]; // untuk ambil lokasi sementara
+
+    //bikin nama unik agar tidak nabrak 
+    $namabaru = time() . "_" . $namaFile;
+    move_uploaded_file($tmpFile, $file . $namabaru);
+ ;
+
+    $query = mysqli_query($koneksi, "INSERT INTO tbl_siswa 
+    (nama, kelas, jurusan, email, alamat, foto)
+    VALUES ('$nama','$kelas','$jurusan','$email','$alamat','$namabaru')");
 
     if ($query) {
-        $berhasil = true;
+      $berhasil = true;
     }
+
 }
 ?>
 
@@ -30,41 +41,88 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-12">
-          <div class="card mb-1">
-            <div class="card-header pb-0">
-              <h6>Authors Form</h6>
-              <form method="Post">
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" value="" id="" required>
-                </div>
-                 <div class="form-group">
-                    <label for="exampleFormControlSelect1" class="mx-3">Kelas</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="data_kelas" required>
-                    <option>X-1</option>
-                    <option>X-2</option>
-                    <option>X-3</option>
-                    
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Jurusan</label>
-                    <input class="form-control" name="data_jurusan" type="text" id="" required>
-                </div>
-                <div class="form-group">
-                    <label for="example-url-input" class="form-control-label mx-3">Alamat</label>
-                    <input class="form-control" name="data_alamat" type="text" value="" id="" required>
-                </div>
+       <div class="col-12">
+  <div class="card mb-3 shadow-sm">
+    <div class="card-header pb-0">
+      <h6 class="mb-3">Authors Form</h6>
 
-                 <div class="text-center mt-4 mb-3">
-                                    <button type="submit" class="btn btn-order btn-lg btn bg-gradient-primary">
-                                        <i class="fa-solid fa-paper-plane"></i></i>Input Data
-                                    </button>
-                 </div>
-  
-            </form>
-            </div>
+      <form method="POST" enctype="multipart/form-data">
+        <!-- Name -->
+        <div class="form-group mb-3">
+          <label class="form-control-label mx-3">Name</label>
+          
+          <input
+            class="form-control mb-3"
+            name="data_nama"
+            type="text"
+            required
+          >
+          <input type="file" name="foto" class="form-control " required>
+        </div>
+
+        <!-- Kelas -->
+        <div class="form-group mb-3">
+          <label class="mx-3">Kelas</label>
+          <select
+            class="form-control"
+            name="data_kelas"
+            required
+          >
+            <option>X-1</option>
+            <option>X-2</option>
+            <option>X-3</option>
+          </select>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+          <label class="form-control-label mx-3">Email</label>
+          <input
+            class="form-control"
+            name="data_email"
+            type="email"
+            required
+          >
+        </div>
+
+        <!-- Jurusan -->
+        <div class="form-group mb-3">
+          <label class="form-control-label mx-3">Jurusan</label>
+          <input
+            class="form-control"
+            name="data_jurusan"
+            type="text"
+            required
+          >
+        </div>
+
+        <!-- Alamat -->
+        <div class="form-group mb-4">
+          <label class="form-control-label mx-3">Alamat</label>
+          <input
+            class="form-control"
+            name="data_alamat"
+            type="text"
+            required
+          >
+        </div>
+
+        <!-- Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            class="btn btn-lg bg-gradient-primary px-5"
+          >
+            <i class="fa-solid fa-paper-plane me-2"></i>
+            Input Data
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
             
 
           </div>
