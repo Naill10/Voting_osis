@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $calon_ketua = $_POST['nama_calon'];
     $pos_visi    = $_POST['visi'];
-    $pos_misi    = $_POST['misi'];
+    $pos_kelas    = $_POST['kelas'];
 
     // CEK UPLOAD FOTO
     if (!empty($_FILES['foto']['name'])) {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "UPDATE tbl_voting SET
                 nama_calon='$calon_ketua',
                 visi='$pos_visi',
-                misi='$pos_misi',
+                kelas='$pos_kelas',
                 foto='$namabaru'
                 WHERE id_calon='$id'";
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "UPDATE tbl_voting SET
                 nama_calon='$calon_ketua',
                 visi='$pos_visi',
-                misi='$pos_misi'
+                kelas='$pos_kelas'
                 WHERE id_calon='$id'";
     }
 
@@ -99,14 +99,15 @@ include "../header/header.php";
   </div>
 
   <div class="form-group">
-    <label class="form-control-label mx-3">Misi</label>
-    <input
-      class="form-control"
-      name="misi"
-      type="text"
-      value="<?= $siswa['misi'] ?>"
-      required
-    >
+    <label class="form-control-label mx-3">Kelas</label>
+<input
+  class="form-control"
+  name="kelas"
+  type="text"
+  value="<?= $siswa['kelas'] ?>"
+  required
+>
+
   </div>
 
   <!-- FOTO LAMA -->

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $calon_ketua = $_POST['nama_calon'];
     $pos_visi = $_POST['visi'];
-    $pos_misi = $_POST['misi'];
+    $pos_kelas = $_POST['kelas'];
     
 
     // folder upload
@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $query = mysqli_query($koneksi, "INSERT INTO tbl_voting 
-    (nama_calon, visi, misi, foto)
-    VALUES ('$calon_ketua','$pos_visi','$pos_misi','$namabaru')");
+    (nama_calon, visi, kelas, foto)
+    VALUES ('$calon_ketua','$pos_visi','$pos_kelas','$namabaru')");
 
     if ($query) {
       $berhasil = true;
@@ -71,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                  
                 </div>
                 <div class="form-group">
-                    <label for="example-email-input" class="form-control-label mx-3">Misi</label>
-                    <input class="form-control" name="misi" type="text" id="">
+                    <label for="example-email-input" class="form-control-label mx-3">Kelas</label>
+                    <input class="form-control" name="kelas" type="text" id="">
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Foto</label>

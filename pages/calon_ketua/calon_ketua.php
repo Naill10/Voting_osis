@@ -56,7 +56,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                       </td>  
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Calon</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Visi</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Misi</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">kelas</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
                       
                      
@@ -110,7 +110,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
     <!-- Misi -->
     <td class="align-middle text-center text-sm">
       <span class="badge badge-sm bg-gradient-success">
-        <?php echo $row['misi']; ?>
+        <?php echo $row['kelas']; ?>
       </span>
     </td>
 
