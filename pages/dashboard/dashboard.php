@@ -9,6 +9,41 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 //$_SERVER["PHP_SELF"] ini adala variabel bawaan php yng beirisi alamat file yang sedang dibuka
 //basename() adalah fungsi php untu ngambil nama file saja adri sbeuah path
 ?>
+
+<style>
+  .card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container-fluid .card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: smoothFade 0.7s ease forwards;
+}
+
+@keyframes smoothFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+</style>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-6 col-12">

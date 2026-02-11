@@ -31,6 +31,42 @@ $current_page = basename($_SERVER["PHP_SELF"]);
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+<style>
+/* Animasi Card Masuk */
+.card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Delay biar smooth */
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-row {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeRow 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeRow {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+</style>
+
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -38,7 +74,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
 
 <body class="g-sidenav-show  bg-gray-100">
 
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4 fade-row">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
@@ -73,35 +109,35 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                   ?>
                   <tbody>
                     <tr>
-                        <td class="text-center text-sm">
+                        <td class="text-center text-sm fade-row">
                         <span class="badge badge-sm bg-gradient-success"><?php echo $no++; ?></span>
                       </td>
                       <td>
-                        <div class="d-flex px-2 py-1">
+                        <div class="d-flex px-2 py-1 fade-row">
                           <div>
                             <img src="../../assets/img/<?php echo $row['foto']; ?>" class="avatar avatar-sm me-3" alt="user1" width="500" height="500" class="rounded-circle">
                             
                           </div>
-                          <div class="d-flex flex-column justify-content-center">
+                          <div class="d-flex flex-column justify-content-center fade-row">
                             <h6 class="mb-0 text-sm"><?php echo $row['nama']; ?></h6>
 
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0"><?php echo $row['kelas']; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 fade-row"><?php echo $row['kelas']; ?></p>
                         
                       </td>
-                      <td class="align-middle text-center text-sm">
+                      <td class="align-middle text-center text-sm fade-row">
                         <span class="badge badge-sm bg-gradient-success"><?php echo $row['jurusan']; ?></span>
                       </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle text-center text-sm fade-row  ">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['email']; ?></span>
                       </td>
-                        <td class="align-middle text-center">
+                        <td class="align-middle text-center text-sm fade-row  ">
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['alamat']; ?></span>
                       </td>
-                      <td class="align-middle text-center">
+                      <td class="align-middle text-center text-sm fade-row">
                        <a href="edit_siswa.php?id=<?= $row['id_siswa']; ?>"
                        class="btn btn-sm btn bg-gradient-warning">
                        Edit

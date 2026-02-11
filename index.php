@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "pages/header/config.php";
 ?>
 
@@ -71,7 +72,8 @@ include "pages/header/config.php";
 
   
 
-    <div class="container text-center">
+    <div class="container text-center" data-aos="fade-up">
+
   <form method="POST" action="pages/voting/proses_pilih.php">
 
     <input type="hidden" name="id_casis" id="idCalon">
@@ -86,7 +88,10 @@ include "pages/header/config.php";
         foreach ($data as $row):
         ?>
 
-        <div class="col-md-4 d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center" 
+     data-aos="fade-up" 
+     data-aos-delay="<?= $no * 150 ?>">
+
           <div class="card calon-card shadow-lg position-relative text-center"
                onclick="pilihCalon(<?= $row['id_calon'] ?>, this)"
                style="width: 25rem; cursor:pointer;">
@@ -291,6 +296,12 @@ Swal.fire({
 unset($_SESSION['vote_error']); 
 endif; ?>
 
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+</script>
 
 </body>
 
