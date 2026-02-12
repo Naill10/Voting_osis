@@ -1,4 +1,4 @@
-.form-control{
+﻿.form-control{
   &.is-invalid{
     &:focus{
       box-shadow: 0 0 0 2px rgba($form-feedback-invalid-color, .6);
@@ -11,3 +11,4 @@
     }
   }
 }
+

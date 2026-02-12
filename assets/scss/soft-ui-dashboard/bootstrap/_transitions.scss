@@ -1,4 +1,4 @@
-.fade {
+﻿.fade {
   @include transition($transition-fade);
 
   &:not(.show) {
@@ -25,3 +25,4 @@
   }
 }
 // scss-docs-end collapse-classes
+

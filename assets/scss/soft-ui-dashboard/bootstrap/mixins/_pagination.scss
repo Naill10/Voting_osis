@@ -1,4 +1,4 @@
-// Pagination
+﻿// Pagination
 
 // scss-docs-start pagination-mixin
 @mixin pagination-size($padding-y, $padding-x, $font-size, $border-radius) {
@@ -8,3 +8,4 @@
   --#{$prefix}pagination-border-radius: #{$border-radius};
 }
 // scss-docs-end pagination-mixin
+

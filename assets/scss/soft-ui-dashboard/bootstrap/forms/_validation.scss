@@ -1,4 +1,4 @@
-// Form validation
+﻿// Form validation
 //
 // Provide feedback to users when form field values are valid or invalid. Works
 // primarily for client-side validation via scoped `:invalid` and `:valid`
@@ -10,3 +10,4 @@
   @include form-validation-state($state, $data...);
 }
 // scss-docs-end form-validation-states-loop
+

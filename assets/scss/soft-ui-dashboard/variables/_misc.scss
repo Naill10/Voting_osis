@@ -1,4 +1,4 @@
-// Horizontal Faded Line
+﻿// Horizontal Faded Line
 $hr-bg:                               transparent !default;
 $hr-transform:                        rotate(90deg) !default;
 $hr-bg-image:                         linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)) !default;
@@ -52,3 +52,4 @@ $hr-horizontal-bg-image-gray-light:           linear-gradient(to right, rgba(0, 
 $hr-horizontal-bg-image-dark:         linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4), rgba(0, 0, 0, 0)) !default;
 $hr-vertical-bg-image-light:          linear-gradient(to bottom, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0)) !default;
 $hr-vertical-bg-image-dark:           linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4), rgba(0, 0, 0, 0)) !default;
+

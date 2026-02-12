@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "../header/config.php";
 //ambil id dari url
 //kalau diurl ada id, simpan ke var $id

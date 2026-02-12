@@ -1,4 +1,4 @@
-.breadcrumb {
+﻿.breadcrumb {
   // scss-docs-start breadcrumb-css-vars
   --#{$prefix}breadcrumb-padding-x: #{$breadcrumb-padding-x};
   --#{$prefix}breadcrumb-padding-y: #{$breadcrumb-padding-y};
@@ -38,3 +38,4 @@
     color: var(--#{$prefix}breadcrumb-item-active-color);
   }
 }
+

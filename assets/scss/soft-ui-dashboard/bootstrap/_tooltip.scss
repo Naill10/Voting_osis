@@ -1,4 +1,4 @@
-// Base class
+﻿// Base class
 .tooltip {
   // scss-docs-start tooltip-css-vars
   --#{$prefix}tooltip-zindex: #{$zindex-tooltip};
@@ -117,3 +117,4 @@
   background-color: var(--#{$prefix}tooltip-bg);
   @include border-radius(var(--#{$prefix}tooltip-border-radius));
 }
+

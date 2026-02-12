@@ -1,4 +1,4 @@
-// Row
+﻿// Row
 //
 // Rows contain your columns.
 
@@ -37,3 +37,4 @@
 @if $enable-grid-classes {
   @include make-grid-columns();
 }
+

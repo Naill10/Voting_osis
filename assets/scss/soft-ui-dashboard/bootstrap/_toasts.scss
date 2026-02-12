@@ -1,4 +1,4 @@
-.toast {
+﻿.toast {
   // scss-docs-start toast-css-vars
   --#{$prefix}toast-zindex: #{$zindex-toast};
   --#{$prefix}toast-padding-x: #{$toast-padding-x};
@@ -71,3 +71,4 @@
   padding: var(--#{$prefix}toast-padding-x);
   word-wrap: break-word;
 }
+

@@ -1,4 +1,4 @@
-@each $prop, $value in $theme-gradient-colors {
+﻿@each $prop, $value in $theme-gradient-colors {
   .bg-gradient-#{$prop} {
     @include gradient-directional(nth($value, 1) 0%, nth($value, -1) 100%, $deg: 310deg);
   }
@@ -16,3 +16,4 @@
     background-image: radial-gradient(200px circle at 50% 70%, rgba($value, .3) 0, $value 100%);
   }
 }
+

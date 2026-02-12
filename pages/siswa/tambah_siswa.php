@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 include "../header/header.php";
 include "../header/config.php";
 
@@ -11,26 +11,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jurusan = $_POST['data_jurusan'];
     $alamat  = $_POST['data_alamat'];
     $email   = $_POST['data_email'];
-   
-   $file = "../../assets/img/";
 
-   // ambil data
-    $namaFile = $_FILES["foto"]["name"]; // untuk ngambil nama file
-    $tmpFile = $_FILES["foto"]["tmp_name"]; // untuk ambil lokasi sementara
+    // folder upload
+    $folder = "../../assets/img/";
 
-    //bikin nama unik agar tidak nabrak 
-    $namabaru = time() . "_" . $namaFile;
-    move_uploaded_file($tmpFile, $file . $namabaru);
- ;
-
-    $query = mysqli_query($koneksi, "INSERT INTO tbl_siswa 
-    (nama, kelas, jurusan, email, alamat, foto)
-    VALUES ('$nama','$kelas','$jurusan','$email','$alamat','$namabaru')");
-
-    if ($query) {
-      $berhasil = true;
+    // pastikan folder ada
+    if (!is_dir($folder)) {
+        mkdir($folder, 0777, true);
     }
 
+    // ambil file
+    $namaFile = $_FILES["foto"]["name"];
+    $tmpFile  = $_FILES["foto"]["tmp_name"];
+    $error    = $_FILES["foto"]["error"];
+
+    $namabaru = null;
+
+    // jika ada file yang diupload
+    if ($error === 0) {
+        $ext = pathinfo($namaFile, PATHINFO_EXTENSION);
+        $namabaru = time() . "_" . uniqid() . "." . $ext;
+        move_uploaded_file($tmpFile, $folder . $namabaru);
+    }
+
+    $query = mysqli_query($koneksi, "INSERT INTO tbl_siswa 
+        (nama, kelas, jurusan, email, alamat, foto)
+        VALUES ('$nama','$kelas','$jurusan','$email','$alamat','$namabaru')");
+
+    if ($query) {
+        $berhasil = true;
+    } else {
+        echo "Gagal: " . mysqli_error($koneksi);
+    }
 }
 ?>
 
@@ -175,3 +187,4 @@ Swal.fire({
 });
 </script>
 <?php } ?>
+

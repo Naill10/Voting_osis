@@ -1,4 +1,4 @@
-// stylelint-disable function-disallowed-list
+﻿// stylelint-disable function-disallowed-list
 
 %offcanvas-css-vars {
   // scss-docs-start offcanvas-css-vars
@@ -141,3 +141,4 @@
   padding: var(--#{$prefix}offcanvas-padding-y) var(--#{$prefix}offcanvas-padding-x);
   overflow-y: auto;
 }
+

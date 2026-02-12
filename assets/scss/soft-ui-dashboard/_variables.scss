@@ -1,4 +1,4 @@
-// Variables
+﻿// Variables
 //
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
@@ -36,7 +36,7 @@ $indigo:  #6366f1 !default;
 $purple:  #a855f7 !default;
 $pink:    #ec4899 !default;
 $red:     #ef4444 !default;
-$orange:  #f97316 !default;
+$orange:  #0ea5e9 !default;
 $yellow:  #eab308 !default;
 $green:   #22c55e !default;
 $teal:    #14b8a6 !default;
@@ -93,7 +93,7 @@ $green-600: #16a34a !default;
 $indigo-600: #4f46e5 !default;
 $lime-600: #65a30d !default;
 $yellow-600: #ca8a04 !default;
-$orange-600: #ea580c !default;
+$orange-600: shade-color($orange, 20%) !default;
 
 $purple-400: #c084fc !default;
 $fuchsia-400: #e879f9 !default;
@@ -104,7 +104,7 @@ $green-400: #4ade80 !default;
 $indigo-400: #818cf8 !default;
 $lime-400: #a3e635 !default;
 $yellow-400: #facc15 !default;
-$orange-400: #fb923c !default;
+$orange-400: tint-color($orange, 20%) !default;
 
 
 // Gradient colors
@@ -1759,3 +1759,4 @@ $tilt-transform-up-transition:      all 0.5s !default;
 
 // Import Utilities
 @import "utilities";
+

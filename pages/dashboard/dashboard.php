@@ -1,4 +1,4 @@
-
+﻿
 <?php 
 include "../header/header.php";
 include "../header/config.php";
@@ -87,7 +87,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
             <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
               <div class="card">
                 <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                <div class="card-body p-3 position-relative">
+                <div class="card-body  p-3 position-relative">
                   <div class="row">
                     <div class="col-8 text-start">
                       <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">

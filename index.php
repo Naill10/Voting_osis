@@ -1,5 +1,11 @@
-<?php
+﻿<?php
 session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login.php");
+    exit;
+}
+
 include "pages/header/config.php";
 ?>
 
@@ -59,8 +65,17 @@ include "pages/header/config.php";
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+        <div class="d-flex align-items-center gap-3">
+  <span class="fw-bold text-primary">
+    <?= isset($_SESSION['nama']) ? $_SESSION['nama'] : 'User'; ?>
+  </span>
 
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+  <a href="logout_login.php" 
+     class="btn btn-danger btn-sm px-3 rounded-pill">
+     Logout
+  </a>
+</div>
+
 
     </div>
   </header>
@@ -306,3 +321,4 @@ endif; ?>
 </body>
 
 </html>
+

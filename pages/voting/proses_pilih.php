@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 include "../header/config.php";
 
@@ -39,3 +39,4 @@ Swal.fire({
 });
 </script>
 <?php } ?>
+

@@ -1,4 +1,4 @@
-// scss-docs-start table-variant
+﻿// scss-docs-start table-variant
 @mixin table-variant($state, $background) {
   .table-#{$state} {
     $color: color-contrast(opaque($body-bg, $background));
@@ -22,3 +22,4 @@
   }
 }
 // scss-docs-end table-variant
+

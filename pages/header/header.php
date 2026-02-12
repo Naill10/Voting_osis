@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php
+﻿<?php
+session_start();
 $current_page = basename($_SERVER["PHP_SELF"]);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
 
 
 <head>
@@ -23,7 +26,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
  <!-- sweat alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- CSS Files -->
-  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -34,7 +37,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-        <img src="../../assets/img/logo_Smk-removebg-preview.png" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="../../assets/img/xpro.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Pesat OSIS</span>
       </a>
     </div>
@@ -146,7 +149,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
     <div class="sidenav-footer mx-3 ">
       <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
         <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpg')"></div>
-        <div class="card-body text-start p-3 w-100">
+        <div class="card-body  text-start p-3 w-100">
           <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
             <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
           </div>
@@ -174,20 +177,26 @@ $current_page = basename($_SERVER["PHP_SELF"]);
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+             
+               <a href="../../admin_login.php" 
+                      class="btn btn-danger btn-sm px-3 rounded-pill">
+                      Logout
+                    </a>
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a>
-            </li>
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
+           <span class="fw-bold text-primary btn btn-sm d-flex align-items-center me-3">
+  <?= $_SESSION['nama'] ?? 'User'; ?>
+</span>
+
+                                    <li class="nav-item d-flex align-items-center">
+                            <a href="#" class="nav-link text-body font-weight-bold px-0 d-flex align-items-center gap-2">
+
+                             <img src="../../assets/img/<?php echo $row['foto']; ?>" class="avatar avatar-sm me-3" alt="user1">
+                              <span class="d-sm-inline d-none"></span>
+                            </a>
+                          </li>
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">

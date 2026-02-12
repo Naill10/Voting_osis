@@ -1,4 +1,4 @@
-@each $state, $value in $theme-gradient-colors {
+﻿@each $state, $value in $theme-gradient-colors {
   .alert-#{$state} {
     @include gradient-directional(nth($value, 1) 0%, darken(nth($value, -1), 8%) 100%, $deg: 310deg);
   }
@@ -15,3 +15,4 @@
     background-image: none;
   }
 }
+
