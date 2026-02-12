@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php if ($login > 0): 
       $data = mysqli_fetch_assoc($query);
-      $_SESSION['admin'] = $data['username'];
+      $_SESSION['nama_admin'] = $data['nama_admin'];
 ?>
 <script>
 Swal.fire({

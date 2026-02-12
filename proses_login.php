@@ -48,7 +48,7 @@ Swal.fire({
   text: 'Username atau password salah!',
   confirmButtonColor: '#dc3545'
 }).then(() => {
-  window.location = 'index_login.php';
+  window.location = 'login.php';
 });
 </script>
 <?php endif; ?>

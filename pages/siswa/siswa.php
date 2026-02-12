@@ -104,7 +104,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                             
                           </div>
                           <div class="d-flex flex-column justify-content-center fade-row">
-                            <h6 class="mb-0 text-sm"><?php echo $row['nama']; ?></h6>
+                            <h6 class="mb-0 text-sm"><?php echo $row['nama_siswa']; ?></h6>
 
                           </div>
                         </div>

@@ -1,6 +1,16 @@
-﻿<?php
+﻿
+
+<?php
 session_start();
 $current_page = basename($_SERVER["PHP_SELF"]);
+
+if (isset($_SESSION["login"])) {
+    header("Location: ../../admin_login.php");
+    exit;
+}
+
+include "config.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -179,24 +189,52 @@ $current_page = basename($_SERVER["PHP_SELF"]);
             <div class="input-group">
              
                <a href="../../admin_login.php" 
-                      class="btn btn-danger btn-sm px-3 rounded-pill">
+                      class="btn btn-danger btn-sm px-3 rounded-pill gap-2 shadow-sm me-3">
                       Logout
                     </a>
+<a href="#" class="btn btn-orange btn-sm px-4 rounded-pill d-flex align-items-center gap-2 shadow-sm">
+  <i class="bi bi-person-badge"></i>
+  <?= $_SESSION['nama_admin'] ?? 'Admin' ?>
+</a>
+
+<style>
+  .btn-danger{
+    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    transition: all .25s ease;
+    box-shadow: 0 4px 12px rgba(255, 0, 60, 0.45);
+  }
+  .btn-danger:hover{
+    background: linear-gradient(135deg,#ff2143,#ff2f0b);
+    transform: translateY(-2px);
+    color: #4d0000;
+    box-shadow: 0 6px 18px rgba(95, 0, 14, 0.55);
+  }
+.btn-orange{
+  background: linear-gradient(135deg,#ff8a00,#ffb347);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  transition: all .25s ease;
+  box-shadow: 0 4px 12px rgba(255,138,0,.45);
+}
+.btn-orange:hover{
+  background: linear-gradient(135deg,#ff6a00,#ff9f1a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255,106,0,.55);
+}
+</style>
+
+
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-           <span class="fw-bold text-primary btn btn-sm d-flex align-items-center me-3">
-  <?= $_SESSION['nama'] ?? 'User'; ?>
-</span>
+        
+         
 
-                                    <li class="nav-item d-flex align-items-center">
-                            <a href="#" class="nav-link text-body font-weight-bold px-0 d-flex align-items-center gap-2">
-
-                             <img src="../../assets/img/<?php echo $row['foto']; ?>" class="avatar avatar-sm me-3" alt="user1">
-                              <span class="d-sm-inline d-none"></span>
-                            </a>
-                          </li>
-
+                                 
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">

@@ -40,7 +40,7 @@ $berhasil = false;
 
         // UPDATE DENGAN FOTO
         $sql = "UPDATE tbl_siswa SET
-                nama='$nama',
+                nama_siswa='$nama',
                 kelas='$kelas',
                 jurusan='$jurusan',
                 alamat='$alamat',
@@ -51,7 +51,7 @@ $berhasil = false;
 
         // UPDATE TANPA FOTO
         $sql = "UPDATE tbl_siswa SET
-                nama='$nama',
+                nama_siswa='$nama',
                 kelas='$kelas',
                 jurusan='$jurusan',
                 alamat='$alamat'
@@ -90,7 +90,7 @@ include "../header/header.php";
       type="text"
       name="data_nama"
       class="form-control"
-      value="<?= $siswa['nama']; ?>"
+      value="<?= $siswa['nama_siswa']; ?>"
       required
     >
   </div>

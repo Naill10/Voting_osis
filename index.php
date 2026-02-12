@@ -67,7 +67,7 @@ include "pages/header/config.php";
       </nav>
         <div class="d-flex align-items-center gap-3">
   <span class="fw-bold text-primary">
-    <?= isset($_SESSION['nama']) ? $_SESSION['nama'] : 'User'; ?>
+    <?= isset($_SESSION['nama_siswa']) ? $_SESSION['nama_siswa'] : 'User'; ?>
   </span>
 
   <a href="logout_login.php" 

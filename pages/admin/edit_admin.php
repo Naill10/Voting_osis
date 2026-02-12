@@ -38,9 +38,9 @@ $berhasil = false;
 
         // UPDATE DENGAN FOTO
         $sql = "UPDATE tbl_admin SET
-                username='$nama',
+                username='$username',
                 password='$password',
-                nama='$nama',
+                nama_admin='$nama',
                 alamat='$alamat',
                 foto='$namabaru'
                 WHERE id_admin='$id'";
@@ -49,7 +49,9 @@ $berhasil = false;
 
         // UPDATE TANPA FOTO
         $sql = "UPDATE tbl_admin SET
-                nama='$nama',
+                username='$username',
+                nama_admin='$nama',
+                password='$password',
                 alamat='$alamat'
                 WHERE id_admin='$id'";
     }
@@ -91,7 +93,7 @@ include "../header/header.php";
                 </div>
                 <div class="form-group">
                     <label for="example-email-input" class="form-control-label mx-3">Name</label>
-                    <input class="form-control" name="data_nama" type="text" id="" value="<?= $siswa['nama'] ?>">
+                    <input class="form-control" name="data_nama" type="text" id="" value="<?= $siswa['nama_admin'] ?>">
                 </div>
                 <div class="form-group">
                     <label for="example-url-input" class="form-control-label mx-3">Alamat</label>

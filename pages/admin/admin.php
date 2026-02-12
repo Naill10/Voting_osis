@@ -132,7 +132,7 @@ $current_page = basename($_SERVER["PHP_SELF"]);
                         <span class="text-secondary text-xs font-weight-bold"><?php echo $row['email']; ?></span>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['nama']; ?></span>
+                        <span class="badge badge-sm bg-gradient-success"><?php echo $row['nama_admin']; ?></span>
                       </td>
                     
                         <td class="align-middle text-center">
