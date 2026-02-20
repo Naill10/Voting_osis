@@ -24,8 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 
 <?php if ($login > 0): 
-      $data = mysqli_fetch_assoc($query);
-      $_SESSION['nama_admin'] = $data['nama_admin'];
+  $data = mysqli_fetch_assoc($query);
+  $_SESSION['login'] = true;
+  if (isset($data['id_admin'])) {
+      $_SESSION['id_admin'] = $data['id_admin'];
+  }
+  $_SESSION['nama_admin'] = $data['nama_admin'];
 ?>
 <script>
 Swal.fire({

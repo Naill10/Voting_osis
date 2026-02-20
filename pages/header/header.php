@@ -4,9 +4,9 @@
 session_start();
 $current_page = basename($_SERVER["PHP_SELF"]);
 
-if (isset($_SESSION["login"])) {
-    header("Location: ../../admin_login.php");
-    exit;
+if (!isset($_SESSION["login"])) {
+  header("Location: ../../admin_login.php");
+  exit;
 }
 
 include "config.php";
