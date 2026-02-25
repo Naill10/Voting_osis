@@ -91,7 +91,7 @@ include "pages/header/config.php";
 
   <form method="POST" action="pages/voting/proses_pilih.php">
 
-    <input type="hidden" name="id_casis" id="idCalon">
+    <input type="hidden" name="id_calon" id="idCalon">
       <h1>Welcome to <span>VoteGo</span></h1>
       <p>Klik Sekarang untuk memulai pemilihan</p>
 

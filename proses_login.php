@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
    $login = mysqli_num_rows($query);
    $data  = mysqli_fetch_assoc($query);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<?php if ($login == 1): 
+<?php if (isset($login) && $login > 0): 
       $_SESSION['login'] = true;
       $_SESSION['nama_siswa'] = $data['nama_siswa'];
       $_SESSION['id_siswa'] = $data['id_siswa'];
@@ -55,4 +56,3 @@ Swal.fire({
 
 </body>
 </html>
-<?php } ?>

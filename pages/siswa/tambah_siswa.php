@@ -7,7 +7,9 @@ $berhasil = false;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nama    = $_POST['data_nama'];
+    $username = $_POST['username'];
     $kelas   = $_POST['data_kelas'];
+    $password = $_POST['password'];
     $jurusan = $_POST['data_jurusan'];
     $alamat  = $_POST['data_alamat'];
     $email   = $_POST['data_email'];
@@ -35,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $query = mysqli_query($koneksi, "INSERT INTO tbl_siswa 
-        (nama, kelas, jurusan, email, alamat, foto)
-        VALUES ('$nama','$kelas','$jurusan','$email','$alamat','$namabaru')");
+        (nama_siswa, username, password, kelas, jurusan, email, alamat, foto)
+        VALUES ('$nama','$username','$password','$kelas','$jurusan','$email','$alamat','$namabaru')");
 
     if ($query) {
         $berhasil = true;
@@ -96,6 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             required
           >
         </div>
+        <div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Password</span>
+					</div>
 
         <!-- Jurusan -->
         <div class="form-group mb-3">
@@ -103,6 +110,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <input
             class="form-control"
             name="data_jurusan"
+            type="text"
+            required
+          >
+        </div>
+        <!-- username -->
+         <div class="form-group mb-3">
+          <label class="form-control-label mx-3">Jurusan</label>
+          <input
+            class="form-control"
+            name="username"
             type="text"
             required
           >

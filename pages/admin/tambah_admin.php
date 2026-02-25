@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $folder = "../../assets/img/";
     move_uploaded_file($tmp_foto, $folder . $foto);
 
-    $query = "INSERT INTO `tbl_admin`(foto,username,password,email,nama,alamat) 
+    $query = "INSERT INTO `tbl_admin`(foto,username,password,email,nama_admin,alamat) 
         VALUES ('$foto','$username','$password','$email','$nama','$alamat')";
 
 
